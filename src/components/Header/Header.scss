@@ -66,20 +66,27 @@
         gap: 20px;
 
         @include md {
-            gap: 25px;
+            gap: 15px;
+        }
+
+        span {
+            padding: 7px;
+            cursor: pointer;
+
+            &:hover {
+                opacity: 0.6;
+            }
         }
 
         svg {
             font-size: 20px;
-            cursor: pointer;
+
 
             @include md {
                 font-size: 24px;
             }
 
-            &:hover {
-                opacity: 0.6;
-            }
+
         }
 
         .cart-icon {
