@@ -2,7 +2,7 @@ import "./Cart.scss";
 import { MdClose } from "react-icons/md";
 import { BsCartX } from "react-icons/bs";
 import CartItem from './CartItem/CartItem'
-const Cart = () => {
+const Cart = ({ setShowCart }) => {
     return (
         <div className="cart-panel">
             <div
@@ -14,7 +14,7 @@ const Cart = () => {
                     <span className="heading">Shopping Cart</span>
                     <span
                         className="close-btn"
-
+                        onClick={() => setShowCart(false)}
                     >
                         <MdClose className="close-btn" />
                         <span className="text">close</span>
@@ -34,6 +34,7 @@ const Cart = () => {
 
                 <>
                     <CartItem />
+
                     <div className="cart-footer">
                         <div className="subtotal">
                             <span className="text">Subtotal:</span>

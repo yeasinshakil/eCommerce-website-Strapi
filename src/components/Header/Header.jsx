@@ -36,7 +36,7 @@ const Header = () => {
             </div>
         </header>
        
-        {showCart && <Cart />}
+        {showCart && <Cart setShowCart={setShowCart} />}
     </>);
 };
 
