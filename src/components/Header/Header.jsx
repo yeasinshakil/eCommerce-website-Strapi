@@ -3,9 +3,11 @@ import { TbSearch } from 'react-icons/tb'
 import { AiOutlineHeart } from 'react-icons/ai'
 import { CgShoppingCart } from 'react-icons/cg'
 import { useEffect, useState } from "react";
-import Cart from '../Cart/Cart'
+import Cart from '../Cart/Cart';
+import Search from './Search/Search'
 const Header = () => {
     const [showCart, setShowCart] = useState(false);
+    const [searchModal, setSearchModal] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const handleScroll = () => {
         const offset = window.scrollY;
@@ -26,7 +28,7 @@ const Header = () => {
                 </ul>
                 <div className="center">EMMAJOHNSTORE</div>
                 <div className="right">
-                    <span><TbSearch /></span>
+                    <span><TbSearch onClick={()=> setSearchModal(true)} /></span>
                     <span><AiOutlineHeart /></span>
                     <span className=" cart-icon" onClick={()=> setShowCart(true)}>
                         <CgShoppingCart />
@@ -37,6 +39,7 @@ const Header = () => {
         </header>
        
         {showCart && <Cart setShowCart={setShowCart} />}
+        {searchModal && <Search setSearchModal={setSearchModal} />}
     </>);
 };
 
