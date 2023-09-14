@@ -58,7 +58,10 @@ const SingleProduct = () => {
                             </div>
                             <button
                                 className="add-to-cart-button"
-                               
+                                onClick={() => {
+                                    handleAddToCart(data?.data?.[0], quantity);
+                                    setQuantity(1);
+                                }}
                             >
                                 <FaCartPlus size={20} />
                                 ADD TO CART
@@ -90,7 +93,8 @@ const SingleProduct = () => {
                     </div>
                 </div>
                 <RelatedProducts
-                    
+                    productId={id}
+                    categoryId={product.categories.data[0].id}
                 />
             </div>
         </div>
