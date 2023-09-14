@@ -1,4 +1,8 @@
-import "./SingleProduct.scss";
+import { useContext, useState } from "react";
+import { Context } from "../../utils/context";
+import { useNavigate, useParams } from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
+import RelatedProducts from "./RelatedProducts/RelatedProducts";
 import {
     FaFacebookF,
     FaTwitter,
@@ -7,32 +11,54 @@ import {
     FaPinterest,
     FaCartPlus,
 } from "react-icons/fa";
-import prod from '../../assets/products/earbuds-prod-2.webp'
-import RelatedProducts from './RelatedProducts/RelatedProducts'
+import "./SingleProduct.scss";
+
 const SingleProduct = () => {
+    const [quantity, setQuantity] = useState(1);
+    const { id } = useParams();
+    const { handleAddToCart } = useContext(Context);
+    const { data } = useFetch(`/api/products?populate=*&[filters][id]=${id}`);
+    
+
+    const decrement = () => {
+        setQuantity((prevState) => {
+            if (prevState === 1) return 1;
+            return prevState - 1;
+        });
+    };
+    const increment = () => {
+        setQuantity((prevState) => prevState + 1);
+    };
+
+    if (!data) return;
+    const product = data?.data?.[0]?.attributes;
+
     return (
         <div className="single-product-main-content">
             <div className="layout">
                 <div className="single-product-page">
                     <div className="left">
                         <img
-                            src={prod}
+                            src={
+                               import.meta.env.VITE_REACT_APP_STRIPE_APP_DEV_URL +
+                                product.productImage.data[0].attributes.url
+                            }
                         />
                     </div>
                     <div className="right">
-                        <span className="name">Headphones</span>
-                        <span className="price">&#2547;499</span>
-                        <span className="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro laboriosam vel nostrum laborum! Fugit maxime sunt excepturi molestias ex unde hic facilis repellendus minus? Velit, vel corrupti. Sequi, cum illum, obcaecati nihil beatae tempore totam magnam quasi neque sint consequuntur possimus perspiciatis nulla nam veritatis at, itaque facilis voluptatum vero.</span>
+                        <span className="name">{product.title}</span>
+                        <span className="price">&#2547;{product.price}</span>
+                        <span className="desc">{product.desc}</span>
 
                         <div className="cart-buttons">
                             <div className="quantity-buttons">
-                                <span>-</span>
-                                <span>2</span>
-                                <span>+</span>
+                                <span onClick={decrement}>-</span>
+                                <span>{quantity}</span>
+                                <span onClick={increment}>+</span>
                             </div>
                             <button
                                 className="add-to-cart-button"
-
+                               
                             >
                                 <FaCartPlus size={20} />
                                 ADD TO CART
@@ -43,8 +69,11 @@ const SingleProduct = () => {
                         <div className="info-item">
                             <span className="text-bold">
                                 Category:{" "}
-                                <span>
-                                    Category
+                                <span >
+                                    {
+                                        product.categories.data[0].attributes
+                                            .title
+                                    }
                                 </span>
                             </span>
                             <span className="text-bold">
@@ -60,10 +89,12 @@ const SingleProduct = () => {
                         </div>
                     </div>
                 </div>
-                <RelatedProducts />
+                <RelatedProducts
+                    
+                />
             </div>
         </div>
-    );;
+    );
 };
 
 export default SingleProduct;
