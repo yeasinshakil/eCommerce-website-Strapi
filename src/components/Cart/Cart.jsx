@@ -28,7 +28,7 @@ const Cart = () => {
                     <div className="empty-cart">
                         <BsCartX />
                         <span>No products in the cart.</span>
-                        <button className="return-cta" onClick={() => {}}>
+                        <button className="return-cta" onClick={() => { }}>
                             RETURN TO SHOP
                         </button>
                     </div>
@@ -47,7 +47,7 @@ const Cart = () => {
                             <div className="button">
                                 <button
                                     className="checkout-cta"
-                                    
+
                                 >
                                     Checkout
                                 </button>

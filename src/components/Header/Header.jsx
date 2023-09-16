@@ -35,7 +35,7 @@ const Header = () => {
                     <span><AiOutlineHeart /></span>
                     <span className=" cart-icon" onClick={()=> setShowCart(true)}>
                         <CgShoppingCart />
-                        <span>5</span>
+                        <span>{cartCount}</span>
                     </span>
                 </div>
             </div>
