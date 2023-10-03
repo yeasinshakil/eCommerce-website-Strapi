@@ -13,7 +13,7 @@ const Category = ({ categories }) => {
                     onClick={() => navigate(`/category/${item.id}`)}
                 >
                     <img
-                        src={import.meta.env.VITE_REACT_APP_STRIPE_APP_DEV_URL+item?.attributes?.image?.data?.attributes?.url
+                        src={item?.attributes?.image?.data?.attributes?.url
                         }
                     />
                 </div>

@@ -32,6 +32,7 @@ const SingleProduct = () => {
 
     if (!data) return;
     const product = data?.data?.[0]?.attributes;
+    console.log(product.productImage.data[0].attributes.url);
 
     return (
         <div className="single-product-main-content">
@@ -40,7 +41,7 @@ const SingleProduct = () => {
                     <div className="left">
                         <img
                             src={
-                               import.meta.env.VITE_REACT_APP_STRIPE_APP_DEV_URL +
+                               
                                 product.productImage.data[0].attributes.url
                             }
                         />

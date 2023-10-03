@@ -27,7 +27,7 @@ const Header = () => {
                 <ul className="left">
                     <li onClick={()=> navigate('/')}>Home</li>
                     <li>About</li>
-                    <li>Categories</li>
+                    <li onClick={()=> navigate('/')}>Categories</li>
                 </ul>
                 <div className="center" onClick={()=> navigate('/')}>EMMAJOHNSTORE</div>
                 <div className="right">

@@ -11,7 +11,7 @@ const Product = ({ data, id }) => {
             <div className="thumbnail">
                 <img
                     src={
-                        import.meta.env.VITE_REACT_APP_STRIPE_APP_DEV_URL +
+                        
                         data?.productImage?.data[0]?.attributes?.url
                     }
                 />

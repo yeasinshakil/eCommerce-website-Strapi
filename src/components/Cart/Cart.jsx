@@ -4,8 +4,30 @@ import { BsCartX } from "react-icons/bs";
 import CartItem from './CartItem/CartItem'
 import { useContext } from "react";
 import { Context } from "../../utils/context";
+import { loadStripe } from '@stripe/stripe-js'
+import { makePaymentRequest } from "../../utils/api";
 const Cart = () => {
     const { cartItems, setShowCart, cartSubTotal } = useContext(Context);
+ 
+    const stripePromise = loadStripe(
+        `pk_test_51MZDLbC1hj3WhcGrhBTNsHoASuLX3Ce9QvJAT8fD3BSJAyinw3nciQYPUA1JzdZqi5w2N9wk8qTCn9aWawbx4T2B00mrMwaqkV`
+    );
+
+    const handlePayment = async () => {
+        try {
+            const stripe = await stripePromise;
+            const res = await makePaymentRequest.post("/api/orders", {
+                products: cartItems,
+            });
+            await stripe.redirectToCheckout({
+                sessionId: res.data.stripeSession.id,
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+
     return (
         <div className="cart-panel">
             <div
@@ -47,6 +69,7 @@ const Cart = () => {
                             <div className="button">
                                 <button
                                     className="checkout-cta"
+                                    onClick={handlePayment}
 
                                 >
                                     Checkout

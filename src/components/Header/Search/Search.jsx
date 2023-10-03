@@ -54,7 +54,7 @@ const Search = ({ setSearchModal }) => {
                             <div className="image-container">
                                 <img
                                     src={
-                                        import.meta.env.VITE_REACT_APP_STRIPE_APP_DEV_URL +
+                                        
                                         item.attributes.productImage.data[0].attributes.url
                                     }
                                 />
